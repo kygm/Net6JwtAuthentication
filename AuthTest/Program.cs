@@ -1,4 +1,4 @@
-using AuthTest;
+using AuthTest.Manager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -12,7 +12,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var key = "kygmtest12345678";
 
 builder.Services.AddAuthentication(x =>
 {
@@ -25,15 +24,13 @@ builder.Services.AddAuthentication(x =>
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Token"])),
         ValidateIssuer = false,
         ValidateAudience = false
     };
 });
 
-
-
-builder.Services.AddSingleton<JwtAuthenticationManager>(new JwtAuthenticationManager(key));
+builder.Services.AddSingleton<JwtAuthenticationManager>();
 
 var app = builder.Build();
 
