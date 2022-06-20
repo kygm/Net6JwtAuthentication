@@ -1,6 +1,7 @@
+using AuthTest.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthTest.Controllers
+namespace AuthTest.Data.Controller.Data
 {
     [ApiController]
     [Route("[controller]")]
