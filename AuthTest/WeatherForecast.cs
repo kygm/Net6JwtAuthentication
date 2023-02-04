@@ -1,4 +1,4 @@
-namespace AuthTest.Data.Models
+namespace AuthTest
 {
     public class WeatherForecast
     {
